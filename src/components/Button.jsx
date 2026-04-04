@@ -29,7 +29,6 @@ const Button = ({
     ...style
   };
 
-  // Black for selected/primary, Red for danger
   const variants = {
     primary: {
       background: 'var(--secondary)', // The Slate Black

@@ -7,8 +7,8 @@ import Dashboard from './pages/Dashboard';
 import Plans from './pages/Plans';
 import Wallet from './pages/Wallet';
 import Admin from './pages/Admin';
+import Phase2Flow from './pages/Phase2Flow';
 
-// Protected Route Wrapper
 const ProtectedRoute = ({ children }) => {
   const { user } = useAppContext();
   if (!user) {
@@ -17,7 +17,6 @@ const ProtectedRoute = ({ children }) => {
   return children;
 };
 
-// Root App Component
 function RootApp() {
   const { user } = useAppContext();
   
@@ -26,7 +25,6 @@ function RootApp() {
       <Routes>
         <Route element={<Layout />}>
            <Route path="/login" element={!user ? <Login /> : <Navigate to="/" replace />} />
-           
            <Route path="/" element={
              <ProtectedRoute>
                <Dashboard />
@@ -51,6 +49,12 @@ function RootApp() {
              </ProtectedRoute>
            } />
            
+           <Route path="/phase2" element={
+             <ProtectedRoute>
+               <Phase2Flow />
+             </ProtectedRoute>
+           } />
+           
            <Route path="*" element={<Navigate to="/" replace />} />
         </Route>
       </Routes>
@@ -58,7 +62,6 @@ function RootApp() {
   );
 }
 
-// Wrapper with AppProvider
 function App() {
   return (
     <AppProvider>

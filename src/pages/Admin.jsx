@@ -11,7 +11,6 @@ const Admin = () => {
          <p className="text-sm text-muted">Platform-wide analytics for GigShield AI underwriting and risk models.</p>
       </div>
 
-      {/* Top Stats */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
         <Card hover={false} className="p-4">
           <div className="text-sm text-muted mb-2 flex justify-between">Active Users <Users size={16}/></div>
@@ -36,22 +35,18 @@ const Admin = () => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* Mock Area Heatmap */}
         <Card hover={false} className="flex flex-col">
           <h3 className="font-bold mb-4">Risk Level Heatmap</h3>
           <div className="flex-1 rounded-lg overflow-hidden relative" style={{ minHeight: '300px', background: '#f8f9fa', border: '1px solid var(--border-glass)' }}>
-             {/* Grid Map Background */}
              <div className="absolute inset-0 opacity-50" style={{ 
                backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 0, 0, 0.05) 1px, transparent 1px)',
                backgroundSize: '20px 20px'
              }} />
              
-             {/* Heat zones */}
              <div className="absolute w-32 h-32 rounded-full bg-danger opacity-50 blur-3xl top-10 left-10 animate-pulse" />
              <div className="absolute w-48 h-48 rounded-full bg-warning opacity-30 blur-3xl bottom-10 right-20" />
              <div className="absolute w-24 h-24 rounded-full bg-primary opacity-40 blur-2xl top-1/2 left-1/2" />
              
-             {/* Map overlays */}
              <div className="absolute bottom-4 left-4 right-4 p-3 glass-panel text-xs flex justify-between items-center backdrop-blur-xl">
                 <span>Bangalore Grid (Zone A)</span>
                 <div className="flex gap-2">
@@ -63,7 +58,6 @@ const Admin = () => {
           </div>
         </Card>
 
-        {/* Live System Logs */}
         <Card hover={false} className="flex flex-col">
           <div className="flex justify-between items-center mb-4">
              <h3 className="font-bold">ML Prediction Stream</h3>

@@ -13,15 +13,21 @@ const PLANS = [
 ];
 
 const Plans = () => {
-  const { buyPlan, activePlan, walletBalance } = useAppContext();
+  const { buyPlan, activePlan, walletBalance, user } = useAppContext();
   const navigate = useNavigate();
   const [selectedPlan, setSelectedPlan] = useState(null);
   const [showPayment, setShowPayment] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
   const [error, setError] = useState(null);
 
+  const getDynamicPremium = (basePremium) => {
+    if (user?.areaRisk === 'High Risk') return basePremium + 5;
+    if (user?.areaRisk === 'Low Risk') return basePremium - 5;
+    return basePremium;
+  };
+
   const handleSelect = (plan) => {
-    setSelectedPlan(plan);
+    setSelectedPlan({ ...plan, premium: getDynamicPremium(plan.premium) });
     setShowPayment(true);
     setError(null);
   };
@@ -56,6 +62,12 @@ const Plans = () => {
          </div>
       )}
 
+      {user?.areaRisk && (
+        <div className="mb-6 p-3 rounded text-center text-sm font-bold shadow-sm inline-block mx-auto left-1/2 relative -translate-x-1/2" style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-light)' }}>
+           Dynamically adjusted for: <span className={user.areaRisk === 'High Risk' ? 'text-danger' : user.areaRisk === 'Low Risk' ? 'text-success' : 'text-primary'}>{user.areaRisk} Zone ({user.areaRisk === 'High Risk' ? '+₹5' : user.areaRisk === 'Low Risk' ? '-₹5' : 'Base Premium'})</span>
+        </div>
+      )}
+
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 relative z-10">
         {PLANS.map((plan) => (
           <Card 
@@ -73,7 +85,7 @@ const Plans = () => {
               <h3 className={`text-2xl font-bold mb-2 ${plan.color}`}>{plan.name}</h3>
               <div className="flex items-baseline justify-center gap-1">
                 <span className="text-sm text-muted">₹</span>
-                <span className="text-4xl font-bold">{plan.premium}</span>
+                <span className="text-4xl font-bold">{getDynamicPremium(plan.premium)}</span>
                 <span className="text-sm text-muted">/week</span>
               </div>
             </div>
@@ -104,7 +116,6 @@ const Plans = () => {
         ))}
       </div>
 
-      {/* Payment Modal Override */}
       {showPayment && selectedPlan && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4" style={{ background: 'var(--bg-dark)' }}>
           <Card hover={false} className="w-full max-w-md animate-fade-in relative overflow-hidden" style={{ border: '1px solid var(--border-light)' }}>
@@ -143,7 +154,6 @@ const Plans = () => {
                </Button>
             </div>
             
-            {/* Fake UPI overlay */}
             {isProcessing && (
               <div className="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-80 z-20">
                  <div className="w-12 h-12 border-4 border-t-primary border-transparent rounded-full animate-spin mb-4" />

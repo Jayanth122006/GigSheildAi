@@ -5,26 +5,19 @@ const AppContext = createContext();
 export const useAppContext = () => useContext(AppContext);
 
 export const AppProvider = ({ children }) => {
-  // User State
-  const [user, setUser] = useState(null); // { name, city, platform }
+  const [user, setUser] = useState(null);
   
-  // Financial State
   const [walletBalance, setWalletBalance] = useState(0);
-  const [activePlan, setActivePlan] = useState(null); // null or { name, premium, coverage }
-  const [earnings, setEarnings] = useState(12400); // Mock weekly earnings
+  const [activePlan, setActivePlan] = useState(null);
+  const [earnings, setEarnings] = useState(12400);
   
-  // Risk & Weather State
   const [weatherCondition, setWeatherCondition] = useState('Clear ☀️');
   const [aqiLevel, setAqiLevel] = useState('Good (45) 🍃');
-  const [riskLevel, setRiskLevel] = useState('Low'); // Low, Medium, High
+  const [riskLevel, setRiskLevel] = useState('Low');
   
-  // Claims State
-  const [claims, setClaims] = useState([
-    // { id: 'CLM-001', date: '2026-03-10', type: 'Rain', amount: 300, status: 'Approved' }
-  ]);
+  const [claims, setClaims] = useState([]);
   const [notifications, setNotifications] = useState([]);
 
-  // Methods
   const login = (userData) => {
     setUser(userData);
     addNotification('Welcome to GigShield AI', 'success');
@@ -58,7 +51,6 @@ export const AppProvider = ({ children }) => {
     }, 4000);
   };
 
-  // The Magic "Trigger External Disruption" Function
   const simulateDisruption = (type) => {
     if (!activePlan) {
       addNotification('Disruption occurred, but you have no active insurance.', 'warning');
@@ -67,12 +59,10 @@ export const AppProvider = ({ children }) => {
       return;
     }
 
-    // Simulate AI detecting the event
     setWeatherCondition('Heavy Torrential Rain 🌧️');
     setRiskLevel('High');
     addNotification(`AI Detected ${type} disruption! Initiating claim...`, 'warning');
     
-    // Simulate auto payout
     setTimeout(() => {
       const claimAmount = activePlan.coverage;
       const newClaim = {
@@ -86,7 +76,7 @@ export const AppProvider = ({ children }) => {
       setClaims([newClaim, ...claims]);
       setWalletBalance(prev => prev + claimAmount);
       addNotification(`Parametric Triger Met! ₹${claimAmount} Auto-Payout to Wallet.`, 'success');
-      setEarnings(prev => prev - 2400); // Show that earnings dropped
+      setEarnings(prev => prev - 2400);
     }, 2500);
   };
 

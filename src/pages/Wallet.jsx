@@ -11,7 +11,6 @@ const Wallet = () => {
   return (
     <div className="animate-fade-in pb-10">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {/* Left Column: Wallet & Demo Controls */}
         <div className="md:col-span-1 flex flex-col gap-6">
            <Card hover={false} className="flex flex-col items-center justify-center text-center p-8 border-t-4" style={{ borderTopColor: 'var(--primary)', minHeight: '260px' }}>
               <div className="p-4 rounded-md mb-4" style={{ background: 'var(--primary)' }}>
@@ -40,7 +39,6 @@ const Wallet = () => {
            </Card>
         </div>
 
-        {/* Right Column: Claims & System Architecture Explanation */}
         <div className="md:col-span-2 flex flex-col gap-6">
            <Card hover={false} className="flex-1">
               <div className="flex items-center justify-between mb-6 border-b pb-4" style={{ borderColor: 'var(--border-glass)' }}>
@@ -109,7 +107,6 @@ const Wallet = () => {
   );
 };
 
-// CheckCircle duplicate for lack of import
 function CheckCircle2Icon(props) {
   return <ShieldCheck {...props} />;
 }

@@ -28,11 +28,11 @@ const Layout = () => {
     { name: 'Plans', path: '/plans', icon: <Shield size={20} /> },
     { name: 'Wallet & Claims', path: '/wallet', icon: <Wallet size={20} /> },
     { name: 'Admin', path: '/admin', icon: <Activity size={20} /> },
+    { name: 'Phase 2 Demo', path: '/phase2', icon: <ShieldAlert size={20} /> },
   ];
 
   return (
     <div className="app-wrapper bg-transparent flex flex-row min-h-screen">
-      {/* Sidebar Navigation */}
       <aside style={{ width: '280px', display: 'flex', flexDirection: 'column', padding: '2.5rem 1.5rem', background: 'var(--bg-surface)', borderRight: '1px solid var(--border-glass)' }}>
         <div className="flex items-center gap-3 mb-12 px-2">
           <div className="text-white p-2 rounded-lg flex items-center justify-center" style={{ background: 'var(--primary)' }}>
@@ -91,11 +91,10 @@ const Layout = () => {
         </div>
       </aside>
 
-      {/* Main Content Area */}
       <main className="flex-1 flex flex-col relative" style={{ height: '100vh', overflowY: 'auto' }}>
         <div className="container flex-1" style={{ padding: '3rem 2rem' }}>
           <header className="flex justify-between items-center mb-10 border-b pb-6" style={{ borderColor: 'var(--border-glass)' }}>
-            <h1 className="text-3xl font-extrabold text-main tracking-tight">{navItems.find(i => i.path === location.pathname)?.name || 'Dashboard'}</h1>
+            <h1 className="text-3xl font-extrabold text-main tracking-tight">{navItems.find(i => i.path === location.pathname)?.name || 'Phase 2 Evaluator'}</h1>
             <div className="flex gap-4 items-center">
                <div className="text-sm px-4 py-2 font-medium rounded-full" style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-light)', color: 'var(--text-muted)' }}>
                  City: <span className="font-bold text-main ml-1">{user.city}</span>
@@ -105,7 +104,6 @@ const Layout = () => {
           <Outlet />
         </div>
         
-        {/* Footer */}
         <footer className="w-full text-center py-8 mt-auto" style={{ borderTop: '1px solid var(--border-glass)', background: 'var(--bg-dark)' }}>
           <p className="text-xs text-muted mb-2 font-medium">© 2026 GigShield AI. All rights reserved for gig workers.</p>
           <div className="flex justify-center gap-6 text-xs font-semibold text-main">
@@ -116,7 +114,6 @@ const Layout = () => {
         </footer>
       </main>
 
-      {/* Global Notifications Array */}
       <div className="fixed top-6 right-6 z-50 flex flex-col gap-3">
         {notifications.map(n => (
           <div 

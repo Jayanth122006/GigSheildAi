@@ -9,15 +9,19 @@ const Login = () => {
   const { login } = useAppContext();
   const navigate = useNavigate();
   
-  // View State: 'login' | 'signup'
   const [mode, setMode] = useState('login');
-  // Flow Step: 1 = Mobile, 2 = OTP, 3 = Profile (Signup only)
   const [step, setStep] = useState(1);
   
-  // Form State
   const [phone, setPhone] = useState('');
   const [otp, setOtp] = useState('');
-  const [profile, setProfile] = useState({ name: '', city: 'Bangalore', platform: 'Zomato' });
+  const [profile, setProfile] = useState({ 
+    name: '', 
+    city: 'Bangalore', 
+    platform: 'Zomato',
+    areaRisk: 'Medium Risk',
+    workingHours: '8',
+    workingDays: '6'
+  });
 
   const handleSendOTP = (e) => {
     e.preventDefault();
@@ -30,8 +34,7 @@ const Login = () => {
        if (mode === 'signup') {
          setStep(3);
        } else {
-         // Dummy login profile fetch
-         login({ name: 'Welcome Back Worker', city: 'Bangalore', platform: 'Swiggy' });
+         login({ name: 'Welcome Back Worker', phone, city: 'Bangalore', platform: 'Swiggy', areaRisk: 'Medium Risk' });
          navigate('/');
        }
     }
@@ -39,7 +42,7 @@ const Login = () => {
 
   const handleComplete = (e) => {
     e.preventDefault();
-    login(profile);
+    login({ ...profile, phone });
     navigate('/');
   };
 
@@ -55,7 +58,6 @@ const Login = () => {
            <p className="text-muted text-sm px-4 font-medium leading-relaxed">Parametric income protection against extreme weather.</p>
         </div>
 
-        {/* Auth Mode Toggle */}
         {step === 1 && (
           <div className="flex p-1 rounded-lg mb-8" style={{ background: 'var(--bg-dark)' }}>
             <button 
@@ -176,6 +178,45 @@ const Login = () => {
                    </div>
                 ))}
               </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                 <label className="text-sm font-bold text-black mb-2 block">Working Hours/Day</label>
+                 <input 
+                   type="number" 
+                   min="1" max="24" required
+                   value={profile.workingHours}
+                   onChange={(e) => setProfile({...profile, workingHours: e.target.value})}
+                   className="w-full p-3 rounded border bg-white text-black font-medium outline-none focus:border-black"
+                   style={{ borderColor: 'var(--border-light)' }}
+                 />
+              </div>
+              <div>
+                 <label className="text-sm font-bold text-black mb-2 block">Working Days/Week</label>
+                 <input 
+                   type="number" 
+                   min="1" max="7" required
+                   value={profile.workingDays}
+                   onChange={(e) => setProfile({...profile, workingDays: e.target.value})}
+                   className="w-full p-3 rounded border bg-white text-black font-medium outline-none focus:border-black"
+                   style={{ borderColor: 'var(--border-light)' }}
+                 />
+              </div>
+            </div>
+
+            <div>
+              <label className="text-sm font-bold text-black mb-2 block flex items-center gap-1"><ShieldAlert size={16}/> Area Risk Zone</label>
+              <select 
+                value={profile.areaRisk}
+                onChange={(e) => setProfile({...profile, areaRisk: e.target.value})}
+                className="w-full p-3 rounded border bg-white text-black font-medium outline-none focus:border-black"
+                style={{ borderColor: 'var(--border-light)' }}
+              >
+                <option value="Low Risk">Low Risk (Fewer Disruptions)</option>
+                <option value="Medium Risk">Medium Risk (Standard)</option>
+                <option value="High Risk">High Risk (Prone to Floods/Heat)</option>
+              </select>
             </div>
 
             <Button fullWidth type="submit" className="mt-4" disabled={!profile.name}>Create Account</Button>

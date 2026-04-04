@@ -20,7 +20,6 @@ const Dashboard = () => {
 
   return (
     <div className="flex flex-col gap-6 animate-fade-in pb-10">
-      {/* Risk Alert Banner */}
       {riskLevel === 'High' && (
         <div className="glass-panel p-4 flex items-center justify-between" style={{ background: 'var(--danger-bg)', borderColor: 'rgba(239, 68, 68, 0.4)' }}>
           <div className="flex items-center gap-4">
@@ -36,10 +35,8 @@ const Dashboard = () => {
         </div>
       )}
 
-      {/* Top row: Earnings & Active Plan */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         
-        {/* Earnings Card */}
         <Card hover={false} className="flex flex-col justify-between" style={{ minHeight: '180px' }}>
           <div className="flex justify-between items-start mb-4">
             <div>
@@ -60,7 +57,6 @@ const Dashboard = () => {
           </div>
         </Card>
 
-        {/* Active Policy Card */}
         <Card hover={false} className="relative overflow-hidden" style={{ minHeight: '180px' }}>
           {activePlan ? (
              <div className="flex flex-col h-full justify-between z-10 relative">
@@ -86,7 +82,6 @@ const Dashboard = () => {
                   </div>
                </div>
                
-               {/* Background glowing shield effect */}
                <div className="absolute right-[-20px] bottom-[-20px] opacity-10 pointer-events-none">
                   <ShieldCheck size={180} />
                </div>
@@ -102,7 +97,6 @@ const Dashboard = () => {
         </Card>
       </div>
 
-      {/* Real-time Environment Analytics */}
       <h2 className="text-xl font-bold mt-4 mb-2">Real-Time Risk Analytics</h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <Card className="flex items-center gap-4">
@@ -144,7 +138,6 @@ const Dashboard = () => {
         </Card>
       </div>
       
-      {/* Wallet Preview */}
       <Card hover={true} onClick={() => navigate('/wallet')} className="mt-4 flex items-center justify-between border border-transparent hover:border-primary">
          <div className="flex items-center gap-4">
             <div className="p-4 rounded-md" style={{ background: 'var(--primary)' }}>
