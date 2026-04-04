@@ -37,10 +37,10 @@ const PolicyCard = ({ user, onAccept }) => {
       </div>
 
       <div className="text-center mb-6 relative z-10">
-         <div className="flex justify-center gap-2 mb-4">
-           <Badge variant="primary">Step 2: Policy Offer</Badge>
-           <Badge variant="secondary" className="bg-blue-50 text-blue-700 border-blue-200">AI Risk Model v2.4</Badge>
-         </div>
+          <div className="flex justify-center gap-2 mb-6">
+            <Badge variant="primary" className="shadow-sm">Step 2: Policy Offer</Badge>
+            <Badge variant="neutral" className="backdrop-blur-md bg-white/5 border-glass text-main font-bold">AI Risk Model v2.4</Badge>
+          </div>
          <h2 className="text-2xl font-bold mb-1">{user.name}'s {user.category} Plan</h2>
          <p className="text-sm text-muted">Machine Learning adjustment for <b>{user.city}</b> ({user.areaRisk})</p>
       </div>
