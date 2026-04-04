@@ -33,7 +33,7 @@ const Layout = () => {
 
   return (
     <div className="app-wrapper bg-transparent flex flex-row min-h-screen">
-      <aside style={{ width: '280px', display: 'flex', flexDirection: 'column', padding: '2.5rem 1.5rem', background: 'var(--bg-surface)', borderRight: '1px solid var(--border-glass)' }}>
+      <aside style={{ width: '280px', flexShrink: 0, display: 'flex', flexDirection: 'column', padding: '2.5rem 1.5rem', background: 'var(--bg-surface)', borderRight: '1px solid var(--border-glass)' }}>
         <div className="flex items-center gap-3 mb-12 px-2">
           <div className="text-white p-2 rounded-lg flex items-center justify-center" style={{ background: 'var(--primary)' }}>
             <ShieldAlert size={24} />
